@@ -1,0 +1,7 @@
+.party{
+  display: grid;
+  grid-template: 1fr 1fr 1fr / auto auto;
+  margin: 4em;
+  text-align: center;
+  justify-content: center;
+}

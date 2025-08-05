@@ -3,7 +3,7 @@ import "./Party.css";
 
 export default function Party(){
   return (
-    <div className="Party">
+    <div className="party">
       <PartyPokemon key="slot-1" slot={0} />
       <PartyPokemon key="slot-2" slot={1} />
       <PartyPokemon key="slot-3" slot={2} />
