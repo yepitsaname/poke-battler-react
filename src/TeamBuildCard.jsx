@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
-import AppContext from './AppContext';
+import { useEffect, useState } from 'react';
 import './TeamBuildCard.css';
 import './types.css'
 
 export default function TeamBuildCard({pokemon, clickHandler}){
-  const { party, setParty } = useContext(AppContext)
   const [pokemonData, setPokemonData] = useState({name: 'empty'});
 
   useEffect(()=>{
