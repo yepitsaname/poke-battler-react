@@ -1,0 +1,21 @@
+:root{
+  background-color: rgb(40,40,40);
+  color: rgb(220,220,220);
+  text-align: center;
+}
+
+nav a {
+  width: 15ch;
+  padding: 2ch;
+  margin: 1ch;
+  border: 1px solid black;
+  border-radius: 1ch;
+  background-color: rgba(0,0,0,0.4);
+  color: rgb(220,220,220);
+  text-decoration: none;
+}
+
+nav a:hover{
+  background-color: rgba(0,0,0,0.2);
+  border-color: rgba(255,255,255,0.7);
+}

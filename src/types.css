@@ -1,5 +1,6 @@
 .blank{
-  background-color: #c1c1c1;
+  -webkit-mask: linear-gradient(#aaaa, #aaaa);
+   mask: linear-gradient(#aaaa, #aaaa);
 }
 
 .normal{

@@ -3,51 +3,48 @@ import AppContext from './AppContext';
 import './TeamBuildCard.css';
 import './types.css'
 
-export default function TeamBuildCard({data, clickHandler}){
-  const [ , , pokeListData, setPokeListData] = useContext(AppContext)
-  const [ pokemon, setPokemon ] = useState(data);
+export default function TeamBuildCard({pokemon, clickHandler}){
+  const { party, setParty } = useContext(AppContext)
+  const [pokemonData, setPokemonData] = useState({name: 'empty'});
 
   useEffect(()=>{
     if( typeof pokemon !== 'object' ){ return };
-    if( !pokeListData.hasOwnProperty(pokemon.name) ){
-      fetch(pokemon.url)
-      .then( response => {
-        if(response.status === 200){
-          return response.json();
-        } else { throw new Error(response.statusText)}
-      })
-      .then( json => {
-        setPokemon( json );
-      })
-      .catch(error => console.log(error))
-    } else {
-      setPokemon(pokeListData[pokemon.name]);
-    }
+    if( Object.keys(pokemon).length > 2 ){
+      setPokemonData(pokemon);
+      return ;
+    };
+
+    fetch(pokemon.url)
+    .then( response => {
+      if(response.status === 200){
+        return response.json();
+      } else { throw new Error(response.statusText)}
+    })
+    .then( json => {
+      setPokemonData(json);
+    })
+    .catch(error => console.log(error));
   },[])
 
-  useEffect(()=>{
-    setPokeListData(state => Object.assign(state, {[pokemon.name]: pokemon}))
-  }, [pokemon])
-
-  if( typeof pokemon !== 'object' || Object.keys(pokemon).length <= 2 ){
+  if( Object.keys(pokemonData).length <= 2 ){
     return(
       <div className={"team-build-card blank"}>
         <div className={"team-build-card-shader"}/>
         <div className="image-wrapper">
-          <img alt={pokemon?.name ? pokemon.name + " image" : "an empty pokeball"} src={"./pokeball-background.png"}/>
+          <img alt={pokemonData.name ? pokemonData.name + " image" : "an empty pokeball"} src={"./pokeball-background.png"}/>
         </div>
-        <h4>{pokemon?.name ? pokemon.name : "empty"}</h4>
+        <h4>{pokemonData.name ? pokemonData.name : "empty"}</h4>
       </div>
     )
   }
 
   return(
-    <div className={"team-build-card " + (pokemon?.types[0].type.name ? pokemon.types[0].type.name : "blank")} onClick={clickHandler}>
-      <div className={"team-build-card-shader "}/>
+    <div className={"team-build-card " + (pokemonData.types[0].type.name ? pokemonData.types[0].type.name : "blank")} onClick={()=>{clickHandler(pokemonData)}}>
+      <div className={"team-build-card-shader " + (pokemonData.types.length > 1 ? pokemonData.types[1].type.name : "blank")}/>
       <div className="image-wrapper">
-        <img alt={pokemon.name + " image"} src={pokemon.sprites.front_default}/>
+        <img alt={pokemonData.name + " image"} src={pokemonData.sprites.front_default}/>
       </div>
-      <h4>{pokemon.name ? pokemon.name : "empty"}</h4>
+      <h4>{pokemonData.name ? pokemonData.name : "empty"}</h4>
     </div>
   )
 }

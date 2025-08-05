@@ -4,21 +4,23 @@ import TeamBuildCard from "./TeamBuildCard";
 import "./TeamBuilder.css"
 
 export default function TeamBuilder(){
-  const [pokeList, , pokeListData, , party, setParty] = useContext(AppContext);
+  const {pokeList, party, setParty} = useContext(AppContext);
 
   const addPartyPokemon = (pokemonToAdd)=>{
     for( let [index, pokemon] of party.entries() ){
-      console.log(index)
       if(pokemon === false){
-        setParty( state => state.splice(index, 1, pokeListData[pokemonToAdd]));
+        let newParty = [...party];
+        newParty.splice(index, 1, pokemonToAdd)
+        setParty( newParty );
         break;
       };
     };
-    console.log(party)
   }
   const removePartyPokemon = (slot)=>{
     if(party[slot] == false){return};
-    setParty( state => state.splice(slot, 1, false) );
+    let newParty = party.map(element=>element);
+    newParty.splice(slot, 1, false);
+    setParty( newParty );
   }
 
   if( !Array.isArray(pokeList) || pokeList?.length < 1 ){
@@ -30,11 +32,11 @@ export default function TeamBuilder(){
       <h2>Team Builder</h2>
       <div className="team-builder-available">
         <h3>Available Pokemon</h3>
-        {pokeList.map(pokemon => <TeamBuildCard key={pokemon.name} data={pokemon} clickHandler={()=>{addPartyPokemon(pokemon.name)}}/>)}
+        {pokeList.map((pokemon) => <TeamBuildCard key={pokemon.name} pokemon={pokemon} clickHandler={addPartyPokemon}/>)}
       </div>
-      <div className="team-builder-party">
+      <div className="team-builder-party" key={party}>
         <h3>Party Pokemon</h3>
-        {party.map((pokemon, index) => <TeamBuildCard key={index} data={pokemon} clickHandler={()=>{removePartyPokemon(index)}}/>)}
+        {party.map((pokemon, index) => <TeamBuildCard key={index} pokemon={pokemon} clickHandler={()=>{removePartyPokemon(index)}}/>)}
       </div>
     </div>
   )

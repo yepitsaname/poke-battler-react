@@ -5,7 +5,8 @@ export default function AppRouter(){
 return (
     <Routes>
       <Route path="/" element=""/>
-      <Route path="/Team-Builder" element={<TeamBuilder/>}/>
+      <Route path="/team-builder" element={<TeamBuilder/>}/>
+      <Route path="/party" element=""></Route>
     </Routes>
   )
 }

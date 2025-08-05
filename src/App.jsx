@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react"
-import {BrowserRouter as Router} from "react-router";
+import {BrowserRouter as Router, Link} from "react-router";
 import AppContext from "./AppContext";
 import AppRouter from "./AppRouter";
 import TeamBuilder from "./TeamBuilder";
+import "./App.css"
 
 const MOCK_DATA = {
   "count": 1302,
@@ -51,7 +52,6 @@ const MOCK_DATA = {
 export default function App() {
   const [party, setParty] = useState([Array(6).fill(false)][0]);
   const [pokeList, setPokeList] = useState([]);
-  const [pokeListData, setPokeListData] = useState({});
 
   useEffect(()=>{
     fetch('https://pokeapi.co/api/v2/pokemon?limit=9')
@@ -66,15 +66,24 @@ export default function App() {
   },[])
 
   return (
-    <AppContext value={[pokeList, setPokeList, pokeListData, setPokeListData, party, setParty]}>
+    <AppContext.Provider value={
+      {
+        pokeList: pokeList, setPokeList: setPokeList,
+        party: party, setParty: setParty
+      }
+    }>
         <Router>
           <header>
             <h1>Pokemon Battling</h1>
           </header>
-          <TeamBuilder />
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/team-builder">Team Builder</Link>
+            <Link to="/party">View Party</Link>
+          </nav>
           <AppRouter />
         </Router>
-    </AppContext>
+    </AppContext.Provider>
   )
 }
 
