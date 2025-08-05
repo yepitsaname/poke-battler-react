@@ -2,52 +2,8 @@ import {useEffect, useState} from "react"
 import {BrowserRouter as Router, Link} from "react-router";
 import AppContext from "./AppContext";
 import AppRouter from "./AppRouter";
-import TeamBuilder from "./TeamBuilder";
 import "./App.css"
 
-const MOCK_DATA = {
-  "count": 1302,
-  "next": "https://pokeapi.co/api/v2/pokemon?offset=9&limit=9",
-  "previous": null,
-  "results": [
-    {
-      "name": "bulbasaur",
-      "url": "https://pokeapi.co/api/v2/pokemon/1/"
-    },
-    {
-      "name": "ivysaur",
-      "url": "https://pokeapi.co/api/v2/pokemon/2/"
-    },
-    {
-      "name": "venusaur",
-      "url": "https://pokeapi.co/api/v2/pokemon/3/"
-    },
-    {
-      "name": "charmander",
-      "url": "https://pokeapi.co/api/v2/pokemon/4/"
-    },
-    {
-      "name": "charmeleon",
-      "url": "https://pokeapi.co/api/v2/pokemon/5/"
-    },
-    {
-      "name": "charizard",
-      "url": "https://pokeapi.co/api/v2/pokemon/6/"
-    },
-    {
-      "name": "squirtle",
-      "url": "https://pokeapi.co/api/v2/pokemon/7/"
-    },
-    {
-      "name": "wartortle",
-      "url": "https://pokeapi.co/api/v2/pokemon/8/"
-    },
-    {
-      "name": "blastoise",
-      "url": "https://pokeapi.co/api/v2/pokemon/9/"
-    }
-  ]
-}
 
 export default function App() {
   const [party, setParty] = useState([Array(6).fill(false)][0]);
@@ -62,7 +18,6 @@ export default function App() {
       })
       .then( json => setPokeList(json.results))
       .catch(error => console.log(error))
-    // setPokeList(MOCK_DATA.results);
   },[])
 
   return (
@@ -86,5 +41,3 @@ export default function App() {
     </AppContext.Provider>
   )
 }
-
-//First Party Selection Page

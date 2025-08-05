@@ -1,0 +1,28 @@
+.party-pokemon{
+  display: grid;
+  grid-template: "image header" 2fr "image hp" 2fr / 1fr 4fr;
+  max-width: 600px;
+  position: relative;
+}
+
+.party-pokemon h4{
+  grid-area: header;
+}
+
+.party-pokemon .slot{
+  grid-area: image;
+  position: absolute;
+}
+
+.party-pokemon img{
+  grid-area: image;
+  width: 120px;
+}
+
+.party-pokemon .hp-bar{
+  grid-area: hp;
+}
+
+.party-pokemon .hp-bar-shader{
+  grid-area: hp;
+}
