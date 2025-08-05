@@ -1,0 +1,40 @@
+.team-builder{
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+}
+
+.team-builder h2{
+  width: 100%;
+}
+
+.team-builder-available{
+  grid-area: available;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 210px;
+  width: 0;
+  max-width: 1260px;
+  flex-shrink: 1;
+  flex-grow: 1;
+}
+
+.team-builder-available h3{
+  width: 100%;
+}
+
+.team-builder-party{
+  grid-area: party;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 800px;
+  width: 420px;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.team-builder-party h3{
+  width: 100%;
+}
